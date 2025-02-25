@@ -21,15 +21,8 @@ function displayPoints() {
         element.textContent = points;
     });
 }
-function resizePageTemporarily() {
-    const originalWidth = window.innerWidth;
-    window.resizeTo(originalWidth + 1, window.innerHeight);
-    setTimeout(() => {
-        window.resizeTo(originalWidth, window.innerHeight);
-    }, 100);
-}
+
 // Call displayPoints when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     displayPoints();
-    resizePageTemporarily();
 });

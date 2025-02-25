@@ -10,7 +10,7 @@
     <script src="libs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="libs/node_modules/html5-qrcode/html5-qrcode.min.js"></script>
     <script src="points.js"></script>
-    <title>DiscountCentral</title>
+    <title>Scan</title>
     <style>
         .scan-container {
             display: flex;
@@ -55,7 +55,7 @@
     <nav class="navbar navbar-top fw-bold fs-5">
         <a href="#"><img src="images/logo_reworked.png" style="max-width: 5rem; display:inline; margin-right: .5rem;">Shopgreen</a>
             <a href="profile.html" class="nav-item">
-                <span id="points-number">0</span> points
+                <span id="points-number"></span> points
             </a>
     </nav>
 
@@ -89,7 +89,6 @@
     </nav>
 
     <script>
-        let points = parseInt(document.getElementById('points-number').textContent, 10) || 0;
         let html5QrcodeScanner;
 
         function onScanSuccess(decodedText, decodedResult) {

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="libs/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="libs/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="libs/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="libs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <title>Vendors</title>
+    <style>
+        .vendor-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .vendor-list {
+            width: 100%;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .vendor-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+        .vendor-item img {
+            width: 5rem;
+            height: 5rem;
+            margin-right: 1rem;
+            border-radius: 0.5rem;
+        }
+        .vendor-item .vendor-details {
+            flex-grow: 1;
+        }
+        .vendor-item .vendor-title {
+            font-weight: bold;
+        }
+        .vendor-item .vendor-text {
+            margin: 0.5rem 0;
+        }
+        .vendor-item:first-child {
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+        .vendor-item:last-child {
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+        .filter-container {
+            margin-bottom: 1rem;
+            display: none;
+            flex-direction: column;
+            width: 100%;
+        }
+        .filter-container input,
+        .filter-container select {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ddd;
+            margin-bottom: 0.5rem;
+        }
+        .hamburger-menu {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+        .hamburger-menu img {
+            width: 25px;
+            height: 25px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-top fw-bold fs-5">
+        <a href="#">DiscountCentral</a>
+        <ul>
+            <li class="nav-item">
+                <span id="points-number">0</span> points
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container vendor-container">
+        <div class="hamburger-menu" id="hamburger-menu">
+            <img src="images/hamburger.png" alt="Menu">
+        </div>
+        <div class="filter-container" id="filter-container">
+            <input type="text" id="search-vendor" placeholder="Search vendors...">
+            <select id="filter-type">
+                <option value="">All Types</option>
+                <option value="2 for 1">2 for 1</option>
+                <option value="percentage">Percentage</option>
+            </select>
+            <select id="sort-discount" style="display: none;">
+                <option value="">Sort by Discount</option>
+                <option value="asc">Discount Ascending</option>
+                <option value="desc">Discount Descending</option>
+            </select>
+            <select id="sort-points">
+                <option value="">Sort by Points</option>
+                <option value="asc">Points Ascending</option>
+                <option value="desc">Points Descending</option>
+            </select>
+        </div>
+        <ul class="vendor-list" id="vendor-list">
+            <li class="vendor-item" data-vendor="McDonald's" data-type="2 for 1" data-discount="50" data-points="10">
+                <img src="images/mcdonalds-brand-logo.jpg" alt="McDonald's">
+                <div class="vendor-details">
+                    <h5 class="vendor-title">McDonald's</h5>
+                    <p class="vendor-text">2 for 1 Menu</p>
+                    <p class="vendor-text"><small class="text-muted">Cost: 10 points</small></p>
+                </div>
+            </li>
+            <li class="vendor-item" data-vendor="Jack and Jones" data-type="percentage" data-discount="20" data-points="50">
+                <img src="images/images.png" alt="Jack and Jones">
+                <div class="vendor-details">
+                    <h5 class="vendor-title">Jack and Jones</h5>
+                    <p class="vendor-text">20% off</p>
+                    <p class="vendor-text"><small class="text-muted">Cost: 50 points</small></p>
+                </div>
+            </li>
+            <li class="vendor-item" data-vendor="H&M" data-type="percentage" data-discount="60" data-points="30">
+                <img src="images/H&M-Logo.svg.png" alt="H&M">
+                <div class="vendor-details">
+                    <h5 class="vendor-title">H&M</h5>
+                    <p class="vendor-text">60% off</p>
+                    <p class="vendor-text"><small class="text-muted">Cost: 30 points</small></p>
+                </div>
+            </li>
+            <li class="vendor-item" data-vendor="Sunset Boulevard" data-type="percentage" data-discount="15" data-points="5">
+                <img src="images/sunset_logo-400x400.png" alt="Sunset Boulevard">
+                <div class="vendor-details">
+                    <h5 class="vendor-title">Sunset Boulevard</h5>
+                    <p class="vendor-text">15% off</p>
+                    <p class="vendor-text"><small class="text-muted">Cost: 5 points</small></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Bottom Navbar -->
+    <nav class="navbar navbar-expand fixed-bottom navbar-bottom">
+        <div class="container-fluid justify-content-around">
+            <a class="nav-link" href="index.html">
+                <img src="images/home.png" alt="Home" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="scan.html">
+                <img src="images/scan.png" alt="Scan" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="profile.html">
+                <img src="images/profile.png" alt="Profile" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="vendors.html">
+                <img src="images/vendors.png" alt="Vendors" style="width: 2rem;">
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        const vendorList = document.getElementById('vendor-list');
+        const searchVendor = document.getElementById('search-vendor');
+        const filterType = document.getElementById('filter-type');
+        const sortDiscount = document.getElementById('sort-discount');
+        const sortPoints = document.getElementById('sort-points');
+        const hamburgerMenu = document.getElementById('hamburger-menu');
+        const filterContainer = document.getElementById('filter-container');
+        const hamburgerImage = hamburgerMenu.querySelector('img');
+
+        hamburgerMenu.addEventListener('click', () => {
+            const isExpanded = filterContainer.style.display === 'flex';
+            filterContainer.style.display = isExpanded ? 'none' : 'flex';
+            hamburgerImage.src = isExpanded ? 'images/hamburger.png' : 'images/cross.png';
+        });
+
+        filterType.addEventListener('change', () => {
+            const typeValue = filterType.value;
+            if (typeValue === 'percentage') {
+                sortDiscount.style.display = 'block';
+            } else {
+                sortDiscount.style.display = 'none';
+            }
+            filterVendors();
+        });
+
+        function filterVendors() {
+            const searchValue = searchVendor.value.toLowerCase();
+            const typeValue = filterType.value;
+            const discountValue = sortDiscount.value;
+            const pointsValue = sortPoints.value;
+
+            const vendors = Array.from(vendorList.children);
+
+            vendors.forEach(vendor => {
+                const vendorName = vendor.getAttribute('data-vendor').toLowerCase();
+                const vendorType = vendor.getAttribute('data-type');
+                const vendorDiscount = parseInt(vendor.getAttribute('data-discount'));
+                const vendorPoints = parseInt(vendor.getAttribute('data-points'));
+
+                let isVisible = true;
+
+                if (searchValue && !vendorName.includes(searchValue)) {
+                    isVisible = false;
+                }
+
+                if (typeValue && vendorType !== typeValue) {
+                    isVisible = false;
+                }
+
+                vendor.style.display = isVisible ? 'flex' : 'none';
+            });
+
+            if (discountValue) {
+                vendors.sort((a, b) => {
+                    const discountA = parseInt(a.getAttribute('data-discount'));
+                    const discountB = parseInt(b.getAttribute('data-discount'));
+                    return discountValue === 'asc' ? discountA - discountB : discountB - discountA;
+                });
+            }
+
+            if (pointsValue) {
+                vendors.sort((a, b) => {
+                    const pointsA = parseInt(a.getAttribute('data-points'));
+                    const pointsB = parseInt(b.getAttribute('data-points'));
+                    return pointsValue === 'asc' ? pointsA - pointsB : pointsB - pointsA;
+                });
+            }
+
+            vendors.forEach(vendor => vendorList.appendChild(vendor));
+        }
+
+        searchVendor.addEventListener('input', filterVendors);
+        sortDiscount.addEventListener('change', filterVendors);
+        sortPoints.addEventListener('change', filterVendors);
+
+        vendorList.addEventListener('click', function(event) {
+            const vendorItem = event.target.closest('.vendor-item');
+            if (vendorItem) {
+                const vendorName = vendorItem.getAttribute('data-vendor');
+                window.location.href = `vendor.html?vendor=${encodeURIComponent(vendorName)}`;
+            }
+        });
+
+        filterVendors();
+    </script>
+</body>
+</html>

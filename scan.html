@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="libs/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="libs/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="libs/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="libs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="libs/node_modules/html5-qrcode/html5-qrcode.min.js"></script>
+    <title>DiscountCentral</title>
+    <style>
+        .scan-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 70vh;
+        }
+        .reader-placeholder {
+            width: 24rem;
+            height: 24rem;
+            background-color: #f0f0f0; /* Light grey background for placeholder */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .scan-buttons {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        .scan-btn {
+            background-color: #7e5815; /* Sandy color */
+            border-radius: 5rem;
+            font-size: 1.5rem;
+            color: white;
+            width: 45%;
+            font-weight: bold;
+            padding: 1rem;
+            margin: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-top fw-bold fs-5">
+        <a href="#">DiscountCentral</a>
+        <ul>
+            <li class="nav-item">
+                <span id="points-number">0</span> points
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container scan-container">
+        <div class="reader-placeholder">
+            <div id="reader" style="width: 100%; height: 100%;"></div>
+        </div>
+        <div class="scan-buttons">
+            <button id="start-scan" class="scan-btn">Start Scanning</button>
+            <button id="stop-scan" class="scan-btn" style="display: none;">Stop Scanning</button>
+        </div>
+    </div>
+
+    <!-- Bottom Navbar -->
+    <nav class="navbar navbar-expand fixed-bottom navbar-bottom">
+        <div class="container-fluid justify-content-around">
+            <a class="nav-link" href="index.html">
+                <img src="images/home.png" alt="Home" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="scan.html">
+                <img src="images/scan.png" alt="Scan" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="profile.html">
+                <img src="images/profile.png" alt="Profile" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="vendors.html">
+                <img src="images/vendors.png" alt="Vendors" style="width: 2rem;">
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        let points = 0;
+        let html5QrcodeScanner;
+
+        function onScanSuccess(decodedText, decodedResult) {
+            // Handle the scanned code as you like, for example:
+            console.log(`Code matched = ${decodedText}`, decodedResult);
+            points += 400;
+            document.getElementById('points-number').textContent = points;
+        }
+
+        function onScanFailure(error) {
+            // Handle scan failure, usually better to ignore and keep scanning.
+            console.warn(`Code scan error = ${error}`);
+        }
+
+        function startScanner() {
+            html5QrcodeScanner = new Html5QrcodeScanner(
+                "reader", { fps: 10, qrbox: 250 });
+            html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+            document.getElementById('start-scan').style.display = 'none';
+            document.getElementById('stop-scan').style.display = 'block';
+        }
+
+        function stopScanner() {
+            if (html5QrcodeScanner) {
+                html5QrcodeScanner.clear();
+            }
+            document.getElementById('start-scan').style.display = 'block';
+            document.getElementById('stop-scan').style.display = 'none';
+        }
+
+        document.getElementById('start-scan').addEventListener('click', startScanner);
+        document.getElementById('stop-scan').addEventListener('click', stopScanner);
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            console.log("DOM fully loaded and parsed");
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                console.log("Camera access is supported");
+                // Request camera permissions
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then((stream) => {
+                        stream.getTracks().forEach(track => track.stop());
+                        console.log("Camera permissions granted");
+                    })
+                    .catch((error) => {
+                        console.error("Camera permissions denied", error);
+                    });
+            } else {
+                console.error("Camera access is not supported");
+            }
+        });
+    </script>
+</body>
+</html>

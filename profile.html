@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="libs/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="libs/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="libs/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="libs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <title>Profile</title>
+    <style>
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .profile-picture {
+            width: 10rem;
+            height: 10rem;
+            border-radius: 50%;
+            background-image: url('images/anonymous.png');
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 1rem;
+        }
+        .profile-info {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            background-color: white;
+            padding: 1.7rem;
+            border-radius: 2rem;
+            font-size: 1.3rem;
+        }
+        .info-input {
+            font-weight: normal;
+        }
+        .profile-info p {
+            margin: 0.5rem 0;
+        }
+        .coupons-container {
+            width: 100%;
+        }
+        .coupons-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .coupons-nav a {
+            margin: 0 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 5rem;
+            text-align: center;
+        }
+        .coupons-nav a.active {
+            background-color: white;
+            color: black;
+        }
+        .coupons-nav a.inactive {
+            background-color: #d3d3d3;
+            color: black;
+        }
+        .coupon-list {
+            display: none;
+        }
+        .coupon-list.active {
+            display: block;
+        }
+        .coupon-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+        .coupon-item img {
+            width: 5rem;
+            height: 5rem;
+            margin-right: 1rem;
+            border-radius: 0.5rem;
+        }
+        .coupon-item .coupon-details {
+            flex-grow: 1;
+            background-color: white;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+        .coupon-item .coupon-title {
+            font-weight: bold;
+        }
+        .coupon-item .coupon-text {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-top fw-bold fs-5">
+        <a href="#">DiscountCentral</a>
+        <ul>
+            <li class="nav-item">
+                <span id="points-number">0</span> points
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container profile-container">
+        <div class="profile-picture"></div>
+        <div class="profile-info">
+            <h2>Britt <span style="text-align: right;" class="info-input">Skaalum</span></h2>
+            <p>Email: <span style="text-align: right;" class="info-input">shopper@gmail.com</span></p>
+            <p>Phone: <span style="text-align: right;" class="info-input">12345678</span></p>
+            <p>Zip Code: <span style="text-align: right;" class="info-input">8800</span></p>
+        </div>
+        <div class="coupons-container">
+            <div class="coupons-nav">
+                <a id="active-coupons-link" class="active">Active Coupons</a>
+                <a id="expired-coupons-link" class="inactive">Expired Coupons</a>
+            </div>
+            <div id="active-coupons" class="coupon-list active">
+                <div class="coupon-item" data-vendor="McDonald's">
+                    <img src="images/mcdonalds-brand-logo.jpg" alt="2 for 1 Menu">
+                    <div class="coupon-details">
+                        <h5 class="coupon-title">2 for 1 Menu</h5>
+                        <p class="coupon-text">Få 2 for prisen af 1 hos McDonald's.</p>
+                        <p class="coupon-text"><small class="text-muted">Cost: 10 points</small></p>
+                    </div>
+                </div>
+                <div class="coupon-item" data-vendor="Jack and Jones">
+                    <img src="images/images.png" alt="20%">
+                    <div class="coupon-details">
+                        <h5 class="coupon-title">20%</h5>
+                        <p class="coupon-text">Få 20% rabat hos Jack and Jones.</p>
+                        <p class="coupon-text"><small class="text-muted">Cost: 50 points</small></p>
+                    </div>
+                </div>
+                <div class="coupon-item" data-vendor="H&M">
+                    <img src="images/H&M-Logo.svg.png" alt="60%">
+                    <div class="coupon-details">
+                        <h5 class="coupon-title">60%</h5>
+                        <p class="coupon-text">Få 60% rabat hos H&M.</p>
+                        <p class="coupon-text"><small class="text-muted">Cost: 30 points</small></p>
+                    </div>
+                </div>
+                <div class="coupon-item" data-vendor="Sunset Boulevard">
+                    <img src="images/sunset_logo-400x400.png" alt="15%">
+                    <div class="coupon-details">
+                        <h5 class="coupon-title">15%</h5>
+                        <p class="coupon-text">Få 15% rabat hos Sunset Boulevard.</p>
+                        <p class="coupon-text"><small class="text-muted">Cost: 5 points</small></p>
+                    </div>
+                </div>
+            </div>
+            <div id="expired-coupons" class="coupon-list">
+                <!-- Placeholder for expired coupons -->
+                <p style="background-color: white;font-weight: bold; font-size: 1.2rem;; padding: 2rem; border-radius: 5rem;">No expired coupons.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navbar -->
+    <nav class="navbar navbar-expand fixed-bottom navbar-bottom">
+        <div class="container-fluid justify-content-around">
+            <a class="nav-link" href="index.html">
+                <img src="images/home.png" alt="Home" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="scan.html">
+                <img src="images/scan.png" alt="Scan" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="profile.html">
+                <img src="images/profile.png" alt="Profile" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="vendors.html">
+                <img src="images/vendors.png" alt="Vendors" style="width: 2rem;">
+            </a>
+        </div>
+    </nav>
+
+    <script>
+        document.getElementById('active-coupons-link').addEventListener('click', function() {
+            document.getElementById('active-coupons').classList.add('active');
+            document.getElementById('expired-coupons').classList.remove('active');
+            this.classList.add('active');
+            this.classList.remove('inactive');
+            document.getElementById('expired-coupons-link').classList.remove('active');
+            document.getElementById('expired-coupons-link').classList.add('inactive');
+        });
+
+        document.getElementById('expired-coupons-link').addEventListener('click', function() {
+            document.getElementById('active-coupons').classList.remove('active');
+            document.getElementById('expired-coupons').classList.add('active');
+            this.classList.add('active');
+            this.classList.remove('inactive');
+            document.getElementById('active-coupons-link').classList.remove('active');
+            document.getElementById('active-coupons-link').classList.add('inactive');
+        });
+
+        document.querySelectorAll('.coupon-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const vendorName = this.getAttribute('data-vendor');
+                window.location.href = `vendor.html?vendor=${encodeURIComponent(vendorName)}`;
+            });
+        });
+        
+    </script>
+</body>
+</html>

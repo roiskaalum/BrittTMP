@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="libs/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script src="libs/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="libs/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="libs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <title>Vendor</title>
+    <style>
+        .vendor-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .coupon-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+        .coupon-item img {
+            width: 5rem;
+            height: 5rem;
+            margin-right: 1rem;
+            border-radius: 0.5rem;
+        }
+        .coupon-item .coupon-details {
+            flex-grow: 1;
+            background-color: white;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+        .coupon-item .coupon-title {
+            font-weight: bold;
+        }
+        .coupon-item .coupon-text {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-top fw-bold fs-5">
+        <a href="#">DiscountCentral</a>
+        <ul>
+            <li class="nav-item">
+                <span id="points-number">0</span> points
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container vendor-container" id="vendor-container">
+        <!-- Vendor discounts will be dynamically generated here -->
+    </div>
+
+    <!-- Bottom Navbar -->
+    <nav class="navbar navbar-expand navbar-light bg-light fixed-bottom navbar-bottom">
+        <div class="container-fluid justify-content-around">
+            <a class="nav-link" href="index.html">
+                <img src="images/home.png" alt="Home" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="scan.html">
+                <img src="images/scan.png" alt="Scan" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="profile.html">
+                <img src="images/profile.png" alt="Profile" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="vendors.html">
+                <img src="images/vendors.png" alt="Vendors" style="width: 2rem;">
+            </a>
+        </div>
+    </nav>
+
+    <script src="vendor.js"></script>
+</body>
+</html>

@@ -11,9 +11,9 @@
     <title>DiscountCentral</title>
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">DiscountCentral</a>
-        <ul class="navbar-nav ml-auto">
+    <nav class="navbar navbar-top fw-bold fs-5">
+        <a href="#">DiscountCentral</a>
+        <ul>
             <li class="nav-item">
                 <span id="points-number">0</span> points
             </li>
@@ -41,19 +41,38 @@
         </a>
     </div>
 
+    <div class="scan-spacer"></div>
     <!-- Scan Receipt Button -->
-    <div class="container d-flex justify-content-center align-items-center pb-5 pt-5" style="height: 50vh;">
-        <a href="scan.html" class="btn btn-success btn-lg" style="border-radius: 50px; width: 100%; height: 10%; display: flex; justify-content: center; align-items: center;">
-            Scan Receipt
+    <div class="container d-flex justify-content-center align-items-center">
+        <a href="scan.html" class="btn scan-btn">
+            Skan Din Kvittering
         </a>
     </div>
 
+    <!-- Bottom Navbar -->
+    <nav class="navbar navbar-expand fixed-bottom navbar-bottom">
+        <div class="container-fluid justify-content-around">
+            <a class="nav-link" href="index.html">
+                <img src="images/home.png" alt="Home" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="scan.html">
+                <img src="images/scan.png" alt="Scan" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="profile.html">
+                <img src="images/profile.png" alt="Profile" style="width: 2rem;">
+            </a>
+            <a class="nav-link" href="vendors.html">
+                <img src="images/vendors.png" alt="Vendors" style="width: 2rem;">
+            </a>
+        </div>
+    </nav>
+
     <script>
         const coupons = [
-            { title: "2 for 1 at McDonald's", description: "Get 2 items for the price of 1 at McDonald's.", cost: 10, type: "2 for 1", discount: 50, image: "https://via.placeholder.com/150" },
-            { title: "20% off at Jack and Jones", description: "Get 20% off at Jack and Jones.", cost: 50, type: "percentage", discount: 20, image: "https://via.placeholder.com/150" },
-            { title: "40% off at H&M", description: "Get 40% off at H&M.", cost: 30, type: "percentage", discount: 40, image: "https://via.placeholder.com/150" },
-            { title: "15% off at Sunset Boulevard", description: "Get 15% off at Sunset Boulevard.", cost: 5, type: "percentage", discount: 15, image: "https://via.placeholder.com/150" }
+            { title: "2 for 1 Menu", description: "Få 2 for prisen af 1 hos McDonald's.", cost: 10, type: "2 for 1", discount: 50, image: "images/mcdonalds-brand-logo.jpg", vendor: "McDonald's" },
+            { title: "20%", description: "Få 20% rabat hos Jack and Jones.", cost: 50, type: "percentage", discount: 20, image: "images/images.png", vendor: "Jack and Jones" },
+            { title: "60%", description: "Få 60% rabat hos H&M.", cost: 30, type: "percentage", discount: 60, image: "images/H&M-Logo.svg.png", vendor: "H&M" },
+            { title: "15%", description: "Få 15% rabat hos Sunset Boulevard.", cost: 5, type: "percentage", discount: 15, image: "images/sunset_logo-400x400.png", vendor: "Sunset Boulevard" }
         ];
 
         function getCheapestCoupon(type) {
@@ -81,6 +100,7 @@
             items.forEach((item, index) => {
                 const carouselItem = document.createElement('div');
                 carouselItem.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+                carouselItem.setAttribute('data-vendor', item.vendor);
 
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -112,6 +132,11 @@
                 card.appendChild(cardBody);
                 carouselItem.appendChild(card);
                 carouselInner.appendChild(carouselItem);
+
+                carouselItem.addEventListener('click', function() {
+                    const vendorName = this.getAttribute('data-vendor');
+                    window.location.href = `vendor.html?vendor=${encodeURIComponent(vendorName)}`;
+                });
             });
         }
 

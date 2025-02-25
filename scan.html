@@ -69,6 +69,7 @@
         </div>
     </div>
     <div class="scan-spacer"></div>
+    <div class="container"><div><button class="scan-btn" data-type="emulateSuccess">A</button></div></div>
 
     <!-- Bottom Navbar -->
     <nav class="navbar navbar-expand fixed-bottom navbar-bottom">
@@ -91,11 +92,14 @@
     <script>
         let html5QrcodeScanner;
 
+        function emulateSuccess(){
+            updatePoints(400);
+        }
+
         function onScanSuccess(decodedText, decodedResult) {
             // Handle the scanned code as you like, for example:
             console.log(`Code matched = ${decodedText}`, decodedResult);
             updatePoints(400);
-            displayPoints();
             alert(`Scanned a qr code, you earned 400 points!, Click Start Scanning again, if you want to scan another one.`);
             stopScanner();
         }
@@ -123,6 +127,8 @@
             document.getElementById('stop-scan').style.display = 'none';
             
         }
+
+        document.querySelector('button[data-type="emulateSuccess"]').addEventListener('click', emulateSuccess);
 
         document.getElementById('start-scan').addEventListener('click', startScanner);
         document.getElementById('stop-scan').addEventListener('click', stopScanner);

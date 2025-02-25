@@ -1,5 +1,5 @@
 // points.js
-const points = 100; // Example points value
+let points = 100; // Example points value
 // Simulate fetching points from a server or local storage
 function fetchPoints() {
     // For demonstration purposes, we'll use a fixed value
@@ -7,11 +7,12 @@ function fetchPoints() {
     return points; // Example points value
 }
 
-function updatePoints(points){
-    points += points;
+function updatePoints(pointsGiven){
+    points += pointsGiven;
     if(points < 0){
         points = 0;
     }
+    displayPoints();
 }
 
 function displayPoints() {

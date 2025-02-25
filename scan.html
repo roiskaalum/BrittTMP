@@ -35,13 +35,12 @@
             width: 100%;
         }
         .scan-btn {
-            background-color: #7e5815; /* Sandy color */
             border-radius: 5rem;
             font-size: 1.5rem;
             color: white;
-            width: 45%;
+            width: 80%;
             font-weight: bold;
-            padding: 1rem;
+            padding: 1.5rem;
             margin: 0.5rem;
         }
         .scanning-placerholder-text {
@@ -69,7 +68,7 @@
         </div>
     </div>
     <div class="scan-spacer"></div>
-    <div class="container"><div><button class="scan-btn" data-type="emulateSuccess">A</button></div></div>
+    <!-- <div class="container"><div><button class="scan-btn" data-type="emulateSuccess">A</button></div></div> -->
 
     <!-- Bottom Navbar -->
     <nav class="navbar navbar-expand fixed-bottom navbar-bottom">
@@ -92,9 +91,9 @@
     <script>
         let html5QrcodeScanner;
 
-        function emulateSuccess(){
-            updatePoints(400);
-        }
+        // function emulateSuccess(){
+        //     updatePoints(400);
+        // }
 
         function onScanSuccess(decodedText, decodedResult) {
             // Handle the scanned code as you like, for example:
@@ -128,7 +127,7 @@
             
         }
 
-        document.querySelector('button[data-type="emulateSuccess"]').addEventListener('click', emulateSuccess);
+        // document.querySelector('button[data-type="emulateSuccess"]').addEventListener('click', emulateSuccess);
 
         document.getElementById('start-scan').addEventListener('click', startScanner);
         document.getElementById('stop-scan').addEventListener('click', stopScanner);

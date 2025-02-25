@@ -1,29 +1,40 @@
 // points.js
-let points = 100; // Example points value
-// Simulate fetching points from a server or local storage
-function fetchPoints() {
-    // For demonstration purposes, we'll use a fixed value
-    // In a real application, you might fetch this from a server or local storage
-    return points; // Example points value
+let points = null;
+
+// Initialize points from localStorage or set to default value
+function initializePoints() {
+    const storedPoints = localStorage.getItem('points');
+    if (storedPoints !== null) {
+        points = parseInt(storedPoints, 10);
+    } else {
+        points = 100; // Default points value
+        localStorage.setItem('points', points);
+    }
 }
 
-function updatePoints(pointsGiven){
+// Simulate fetching points from local storage
+function fetchPoints() {
+    return points;
+}
+
+function updatePoints(pointsGiven) {
     points += pointsGiven;
-    if(points < 0){
+    if (points < 0) {
         points = 0;
     }
+    localStorage.setItem('points', points); // Save updated points to localStorage
     displayPoints();
 }
 
 function displayPoints() {
-    const points = fetchPoints();
     const pointsElements = document.querySelectorAll('#points-number');
     pointsElements.forEach(element => {
         element.textContent = points;
     });
 }
 
-// Call displayPoints when the DOM is fully loaded
+// Initialize points and call displayPoints when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
+    initializePoints();
     displayPoints();
 });

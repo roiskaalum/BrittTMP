@@ -9,6 +9,7 @@
     <script src="libs/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="libs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="libs/node_modules/html5-qrcode/html5-qrcode.min.js"></script>
+    <script src="points.js"></script>
     <title>DiscountCentral</title>
     <style>
         .scan-container {
@@ -25,6 +26,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 5em;
         }
         .scan-buttons {
             margin-top: 1rem;
@@ -42,55 +44,61 @@
             padding: 1rem;
             margin: 0.5rem;
         }
+        .scanning-placerholder-text {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #7e5815; /* Sandy color */
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-top fw-bold fs-5">
-        <a href="#">DiscountCentral</a>
-        <ul>
-            <li class="nav-item">
+        <a href="#"><img src="images/logo_reworked.png" style="max-width: 5rem; display:inline; margin-right: .5rem;">Shopgreen</a>
+            <a href="profile.html" class="nav-item">
                 <span id="points-number">0</span> points
-            </li>
-        </ul>
+            </a>
     </nav>
 
     <div class="container scan-container">
         <div class="reader-placeholder">
-            <div id="reader" style="width: 100%; height: 100%;"></div>
+            <div id="reader" style="width: 100%; height: 100%;"><span style="font-size: 2rem;font-weight: bold; padding: 1.5rem;"><p>Klik Start, og skan en QR kode for at tilføje point til din bruger</p></span></div>
         </div>
         <div class="scan-buttons">
             <button id="start-scan" class="scan-btn">Start Scanning</button>
             <button id="stop-scan" class="scan-btn" style="display: none;">Stop Scanning</button>
         </div>
     </div>
+    <div class="scan-spacer"></div>
 
     <!-- Bottom Navbar -->
     <nav class="navbar navbar-expand fixed-bottom navbar-bottom">
         <div class="container-fluid justify-content-around">
             <a class="nav-link" href="index.html">
-                <img src="images/home.png" alt="Home" style="width: 2rem;">
+                <img src="images/home_white.png" alt="Home" style="width: 2rem;">
             </a>
             <a class="nav-link" href="scan.html">
-                <img src="images/scan.png" alt="Scan" style="width: 2rem;">
+                <img src="images/scan_white.png" alt="Scan" style="width: 2rem;">
             </a>
             <a class="nav-link" href="profile.html">
-                <img src="images/profile.png" alt="Profile" style="width: 2rem;">
+                <img src="images/profile_white.png" alt="Profile" style="width: 2rem;">
             </a>
             <a class="nav-link" href="vendors.html">
-                <img src="images/vendors.png" alt="Vendors" style="width: 2rem;">
+                <img src="images/vendors_white.png" alt="Vendors" style="width: 2rem;">
             </a>
         </div>
     </nav>
 
     <script>
-        let points = 0;
+        let points = parseInt(document.getElementById('points-number').textContent, 10) || 0;
         let html5QrcodeScanner;
 
         function onScanSuccess(decodedText, decodedResult) {
             // Handle the scanned code as you like, for example:
             console.log(`Code matched = ${decodedText}`, decodedResult);
-            points += 400;
-            document.getElementById('points-number').textContent = points;
+            updatePoints(400);
+            displayPoints();
+            alert(`Scanned a qr code, you earned 400 points!, Click Start Scanning again, if you want to scan another one.`);
+            stopScanner();
         }
 
         function onScanFailure(error) {
@@ -99,11 +107,13 @@
         }
 
         function startScanner() {
+            document.getElementById('reader').innerHTML = '';
             html5QrcodeScanner = new Html5QrcodeScanner(
                 "reader", { fps: 10, qrbox: 250 });
             html5QrcodeScanner.render(onScanSuccess, onScanFailure);
             document.getElementById('start-scan').style.display = 'none';
             document.getElementById('stop-scan').style.display = 'block';
+            
         }
 
         function stopScanner() {
@@ -112,6 +122,7 @@
             }
             document.getElementById('start-scan').style.display = 'block';
             document.getElementById('stop-scan').style.display = 'none';
+            
         }
 
         document.getElementById('start-scan').addEventListener('click', startScanner);

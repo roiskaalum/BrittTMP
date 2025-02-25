@@ -8,17 +8,22 @@
     <script src="libs/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="libs/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="libs/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <title>DiscountCentral</title>
+    <script src="points.js"></script>
+    <title>Shopgreen</title>
 </head>
 <body>
     <nav class="navbar navbar-top fw-bold fs-5">
-        <a href="#">DiscountCentral</a>
-        <ul>
-            <li class="nav-item">
-                <span id="points-number">0</span> points
-            </li>
-        </ul>
+        <a href="#"><img src="images/logo_reworked.png" style="max-width: 5rem; display:inline; margin-right: .5rem;">Shopgreen</a>
+            <a href="profile.html" class="nav-item">
+                <span id="points-number"></span> points
+            </a>
     </nav>
+
+    <div class="scan-spacer"></div>
+    <div class="container d-flex justify-content-center align-items-center">
+        <img src="images/bgimg_reworked.png">
+    </div>
+    <div class="scan-spacer"></div>
 
     <!-- Original Carousel -->
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
@@ -48,21 +53,23 @@
             Skan Din Kvittering
         </a>
     </div>
+    <div class="scan-spacer"></div>
+    
 
     <!-- Bottom Navbar -->
     <nav class="navbar navbar-expand fixed-bottom navbar-bottom">
         <div class="container-fluid justify-content-around">
             <a class="nav-link" href="index.html">
-                <img src="images/home.png" alt="Home" style="width: 2rem;">
+                <img src="images/home_white.png" alt="Home" style="width: 2rem;">
             </a>
             <a class="nav-link" href="scan.html">
-                <img src="images/scan.png" alt="Scan" style="width: 2rem;">
+                <img src="images/scan_white.png" alt="Scan" style="width: 2rem;">
             </a>
             <a class="nav-link" href="profile.html">
-                <img src="images/profile.png" alt="Profile" style="width: 2rem;">
+                <img src="images/profile_white.png" alt="Profile" style="width: 2rem;">
             </a>
             <a class="nav-link" href="vendors.html">
-                <img src="images/vendors.png" alt="Vendors" style="width: 2rem;">
+                <img src="images/vendors_white.png" alt="Vendors" style="width: 2rem;">
             </a>
         </div>
     </nav>
